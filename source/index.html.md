@@ -1,239 +1,128 @@
 ---
-title: API Reference
+title: Webservices
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+language_tabs: 
+
+  - python: Python
+  - json: JSON Request
+  - shell: JSON Response
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href='www.waterinfo.rws.nl'>Website Waterinfo</a>
+
 
 includes:
+  - TutorialLoc
+  - TutorialPara
+  - MetaDataservice
+  - OnlineWaarnemingenservice
+  - BulkWaarnemingService
+  - WebFeatureServices
+  - version
   - errors
+
 
 search: true
 ---
-
 # Introduction
-
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+```python
+// Nothing to show
 ```
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
+```json
+// Nothing to show
 ```
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+// Nothing to show
 ```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Check the following languages  on the right  ------ >
 </aside>
+The system is intended to access/retrieve the data in the distributie laag through web services. the
+data is accessed through five web services (three HTTP JSON web services and two WFS
+web service):
+  
+Webservices |
+| ----- |
+| MetadataService |
+| Online Waarnemingen Service |
+| Bulk Waarnemingen Service |
+| Web Feature Service |
+| Web Mapping Service | 
 
-# Kittens
 
-## Get All Kittens
+**Metadata Service** 
 
-```ruby
-require 'kittn'
+The Metadata Service consists of one function:
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+Function |
+| ----- |
+| Ophalen Catalogus |
 
-```python
-import kittn
+A request for these service tasks is provided several lists on metadata from the
+distributie laag. On the basis of the data in these lists, one can fill in forms for one of the four
+OnlineWaarnemingenServices.
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+**OnlineWaarnemingenServices**
 
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
+The OnlineWaarnemingenServices consists of four functions:
 
-```javascript
-const kittn = require('kittn');
+ Function | 
+| ----- |
+| Ophalen Waarnemingen | 
+| Ophalen Laatste Waarnemingen | 
+| Ophalen Aantal Waarnemingen | 
+| Check Waarnemingen Aanwezig
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
+With a request to the OphalenWaarnemingen service it is possible observations to die
+meet the specified parameters. These parameters relate to the Aquometadata, Locatie
+and Periode the observations have been performed. An application to the OphalenLaatsteWaarnemingenService retrieves the last observation that has been given from the Aquametadata concerned
+attributes. The service Ophalen laatste Waarnemingen is the number of observations per grouped
+specified grouping period. The CheckWaarnemingenAanwezigService returns from there observations
+the distributie laag are those that comply with the parameters provided.
 
-> The above command returns JSON structured like this:
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
+**BulkWaarnemingenService**
 
-This endpoint retrieves all kittens.
+The BulkWaarnemingenService consists of one function:
 
-### HTTP Request
+Function |
+| ----- | 
+| Aanvragen Bulk Waarnemingen
 
-`GET http://example.com/api/kittens`
+With the AanvragenBulkWaarnemingen service an application can be made to a
+a server that can be downloaded from a Rijkswaterstaat server at a later time.
 
-### Query Parameters
+**Web Feature Service**
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+The Web Feature Service consists of two functions:
+  
+Function |
+| ----- |
+| Locaties
+| Locaties Met Laatste Waarneming
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+With the Mapserver, the geometry within the distributie laag is made available through Web
+Feature Service. Through the Web Feature Service one can find the locaties and locaties in combination with the last 
+Observation .
 
-## Get a Specific Kitten
+**Web Mapping Service**
 
-```ruby
-require 'kittn'
+The Web Mapping Service consists of a service with a Get Functions:
+  
+Function | 
+| ------ | 
+| WMS versie 1.1.0
+| WMS versie 1.1.1
+| WMS versie 1.3.0
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+The Mapping service responds to an xml with a description of the layers.
+The Getmap service provides an image of the specified area.
+The Getfeature provides the details of a feature per location as an answer.
 
-```python
-import kittn
+**Dependence**
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+The web services depend on the distributie laag. When the distributie laag is not functioning properly,
+this has an influence on the functioning of the web services. Create all web services and the Web Feature Service
+use of the Locatie, aquometadata and observations in the distributie laag.
