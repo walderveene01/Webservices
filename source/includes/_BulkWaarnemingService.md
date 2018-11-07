@@ -58,10 +58,10 @@ Function |
         "Succesvol":true}
 ```
 Below is a sample request for requesting a Bulk Waarnemingen. This service is different
-of the other web services. This has to do with the fact that there is no information about the observations
-is returned immediately. The request is actually parked in the distribution web services database
-after which this data is collected at a later date. This data is based on
-various settings are collected after which a compressed file is generated. When this is
+from the other web services. This has to do with the fact that there is no information about the observations
+returned immediately. The request is actually parked in the distribution web services database
+after this data is collected at a later date. This data is based on
+various settings which are collected after  a compressed file is generated. When this is
 file is created the applicant is informed that it can be downloaded from a remote location.
 A valid e-mail address must be provided for this purpose. A valid e-mail address meets the
 next regular expression (within quotes):
